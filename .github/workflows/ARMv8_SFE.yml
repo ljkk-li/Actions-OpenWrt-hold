@@ -40,27 +40,6 @@ jobs:
     steps:
     #- name: WeChat notification
     #  run: curl https://sc.ftqq.com/${{ secrets.ServerChan }}.send?text=${{ env.FILE_NAME }}开始编译
-      
-    - name: Checkout
-      uses: actions/checkout@master
-  
-    - name: Initialization environment
-      env:
-        DEBIAN_FRONTEND: noninteractive
-      run: |
-        docker rmi `docker images -q`
-        sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d /usr/local/lib/android
-        sudo -E apt -y purge azure-cli* docker* ghc* zulu* llvm* firefox google* dotnet* powershell* openjdk* mysql* php* mongodb* dotnet* snap* aspnetcore*
-        [ -n "$AGENT_TOOLSDIRECTORY" ] && sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-        sudo -E apt update
-        sudo -E apt -y install $(curl -fsSL https://is.gd/depends_ubuntu_2204)
-        sudo -E apt -y autoremove --purge
-        sudo -E systemctl daemon-reload
-        sudo -E apt clean
-        sudo timedatectl set-timezone "$TZ"
-        udo chown $USER:$GROUPS $GITHUB_WORKSPACE
-        echo "status=success" >> ${GITHUB_OUTPUT}
-        df -Th
 
     - name: Check server configuration
       run: |
@@ -125,6 +104,27 @@ jobs:
         echo "=============================================================================="
         df -hT
         echo "=============================================================================="
+      
+    - name: Checkout
+      uses: actions/checkout@master
+  
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        docker rmi `docker images -q`
+        sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d /usr/local/lib/android
+        sudo -E apt -y purge azure-cli* docker* ghc* zulu* llvm* firefox google* dotnet* powershell* openjdk* mysql* php* mongodb* dotnet* snap* aspnetcore*
+        [ -n "$AGENT_TOOLSDIRECTORY" ] && sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        sudo -E apt update
+        sudo -E apt -y install $(curl -fsSL https://is.gd/depends_ubuntu_2204)
+        sudo -E apt -y autoremove --purge
+        sudo -E systemctl daemon-reload
+        sudo -E apt clean
+        sudo timedatectl set-timezone "$TZ"
+        udo chown $USER:$GROUPS $GITHUB_WORKSPACE
+        echo "status=success" >> ${GITHUB_OUTPUT}
+        df -Th
 
     - name: Clone source code
       working-directory: /workdir
