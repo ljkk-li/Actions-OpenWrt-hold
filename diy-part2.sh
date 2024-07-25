@@ -19,6 +19,12 @@ rm -rf feeds/packages/net/mosdns
 #添加额外软件包
 git clone --depth=1 https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
 
+#移除不用软件包
+rm -rf feeds/packages/lang/golang
+
+#添加额外软件包
+git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
+
 git clone --depth=1 https://github.com/gdy666/luci-app-lucky.git lucky-repo
 cp -rf lucky-repo/luci-app-lucky package/luci-app-lucky
 cp -rf lucky-repo/lucky package/lucky
