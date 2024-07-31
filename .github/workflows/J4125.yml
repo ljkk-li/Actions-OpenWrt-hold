@@ -11,7 +11,7 @@ on:
     paths:
       - 'x86_64/J4125.config'
   schedule:
-    - cron: 0 17 * * *
+    - cron: 0 15 10 L * ?
   watch:
     types: started
 
