@@ -22,6 +22,7 @@ git clone --depth=1 https://github.com/destan19/OpenAppFilter.git package/OpenAp
 #移除不用软件包
 rm -rf feeds/packages/lang/golang
 rm -rf feeds/packages/lang/node
+rm -rf feeds/luci/themes/luci-theme-argon
 
 #添加额外软件包
 git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
