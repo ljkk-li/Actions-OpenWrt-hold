@@ -25,7 +25,8 @@ rm -rf feeds/packages/lang/node
 rm -rf feeds/luci/themes/luci-theme-argon
 
 #添加额外软件包
-git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
+#git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
+git clone https://github.com/kenzok8/golang feeds/packages/lang/golang
 git clone https://github.com/sbwml/feeds_packages_lang_node-prebuilt -b packages-24.10 feeds/packages/lang/node
 git clone --depth=1 https://github.com/gdy666/luci-app-lucky.git lucky-repo
 cp -rf lucky-repo/luci-app-lucky package/luci-app-lucky
