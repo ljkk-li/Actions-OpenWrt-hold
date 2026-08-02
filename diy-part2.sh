@@ -24,6 +24,14 @@ git clone --depth=1 https://github.com/destan19/OpenAppFilter.git package/OpenAp
 rm -rf feeds/packages/lang/golang
 rm -rf feeds/packages/lang/node
 rm -rf feeds/luci/themes/luci-theme-argon
+# 1. 强行在当前生成的 .config 配置文件中关闭 ksmbd 组件
+sed -i 's/CONFIG_PACKAGE_luci-app-ksmbd=y/# CONFIG_PACKAGE_luci-app-ksmbd is not set/' .config
+sed -i 's/CONFIG_PACKAGE_ksmbd-server=y/# CONFIG_PACKAGE_ksmbd-server is not set/' .config
+sed -i 's/CONFIG_PACKAGE_kmod-fs-ksmbd=y/# CONFIG_PACKAGE_kmod-fs-ksmbd is not set/' .config
+          
+# 2. 从 Feeds 软链接中物理移除，确保编译索引彻底无视该旧包（终极大法）
+rm -rf package/feeds/packages/ksmbd-server
+rm -rf package/kernel/ksmbd
 
 #添加额外软件包
 git clone https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
